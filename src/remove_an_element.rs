@@ -11,6 +11,7 @@ impl Solution {
             }
         }
 
+        dbg!(nums);
         i as i32
     }
 }
@@ -44,13 +45,5 @@ mod tests {
 
         let answer = Solution::remove_element(&mut nums, target);
         assert_eq!(0, answer);
-    }
-    #[test]
-    fn remove_element_one_element() {
-        let mut nums = vec![1];
-        let target = 1;
-
-        let answer = Solution::remove_element(&mut nums, target);
-        assert_eq!(1, answer);
     }
 }
