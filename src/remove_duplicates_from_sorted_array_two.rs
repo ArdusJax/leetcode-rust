@@ -18,6 +18,7 @@ impl Solution {
             j += 1;
         }
         i += 1;
+        // Added this for a little insight into what the final vecl looks like
         dbg!(nums);
         i as i32
     }
