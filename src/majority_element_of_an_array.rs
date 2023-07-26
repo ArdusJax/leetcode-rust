@@ -33,6 +33,6 @@ mod tests {
     pub fn large_array_test() {
         let large_test = vec![2, 2, 1, 1, 1, 2, 2];
         let result = Solution::majority_element(large_test);
-        assert_eq!(result, 3);
+        assert_eq!(result, 2);
     }
 }
