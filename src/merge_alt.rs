@@ -1,4 +1,4 @@
-struct Solution;
+pub struct Solution {}
 impl Solution {
     pub fn merge_alternately_zip(word1: String, word2: String) -> String {
         word1
