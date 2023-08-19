@@ -1,6 +1,6 @@
 struct Solution;
 impl Solution {
-    pub fn merge_alternately(word1: String, word2: String) -> String {
+    pub fn merge_alternately_zip(word1: String, word2: String) -> String {
         word1
             .chars()
             .into_iter()
@@ -21,13 +21,17 @@ impl Solution {
         format!("{}{}", res, rest.1)
     }
 
-    pub fn merge_alternately_append_overflow(word1: String, word2: String) -> String {
-        let mut res = String::new();
-        let (mut iter1, mut iter2) = (word1.chars(), word2.chars());
+    pub fn merge_alternately(word1: String, word2: String) -> String {
+        let (mut iter1, mut iter2, mut res) = (word1.chars(), word2.chars(), String::new());
         while let Some(c) = iter1.next() {
             if let Some(cc) = iter2.next() {
-                res = format!("{}{}", c, cc);
+                res = format!("{}{}{}", res, c, cc);
+            } else {
+                res = format!("{}{}", res, c);
             }
+        }
+        while let Some(c) = iter2.next() {
+            res = format!("{}{}", res, c);
         }
         res
     }
@@ -38,12 +42,28 @@ mod tests {
     use super::*;
 
     #[test]
-    fn merge_alt_simple() {
+    fn msa_example_1() {
+        let s1 = String::from("abc");
+        let s2 = String::from("pqr");
+
+        let res = Solution::merge_alternately(s1, s2);
+        assert_eq!(res, "apbqcr");
+    }
+    #[test]
+    fn msa_example_2() {
         let s1 = String::from("ab");
         let s2 = String::from("pqrs");
 
-        let res = Solution::merge_alternately_without_zip(s1, s2);
+        let res = Solution::merge_alternately(s1, s2);
         assert_eq!(res, "apbqrs");
+    }
+    #[test]
+    fn msa_example_3() {
+        let s1 = String::from("abcd");
+        let s2 = String::from("pq");
+
+        let res = Solution::merge_alternately(s1, s2);
+        assert_eq!(res, "apbqcd");
     }
     #[test]
     fn merge_alt_simple_second_string_bigger() {
@@ -58,7 +78,7 @@ mod tests {
         let s1 = String::from("abc");
         let s2 = String::from("def");
 
-        let res = Solution::merge_alternately(s1, s2);
+        let res = Solution::merge_alternately_zip(s1, s2);
         assert_eq!(res, "adbecf");
     }
 }
