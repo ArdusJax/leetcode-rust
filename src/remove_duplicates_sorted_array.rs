@@ -1,7 +1,7 @@
 pub struct Solution {}
 impl Solution {
     pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
-        let mut i = 1 as usize;
+        let mut i = 1usize;
         for j in 0..nums.len() {
             if nums[i - 1] != nums[j] {
                 nums[i] = nums[j];
@@ -12,7 +12,7 @@ impl Solution {
     }
 
     pub fn remove_duplicates_with_while(nums: &mut Vec<i32>) -> i32 {
-        let (mut i, mut j) = (1 as usize, 0 as usize);
+        let (mut i, mut j) = (1usize, 0usize);
         while j < nums.len() {
             if nums[i - 1] != nums[j] {
                 nums[i] = nums[j];
