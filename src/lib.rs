@@ -1,3 +1,4 @@
+pub mod best_time_to_buy_and_sell;
 pub mod find_the_differences;
 pub mod majority_element_of_an_array;
 pub mod merge_alt;
