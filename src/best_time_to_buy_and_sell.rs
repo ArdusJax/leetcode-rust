@@ -46,6 +46,23 @@ impl Solution {
             profit
         })
     }
+    /// Best Time to Buy and Sell - Part II
+    /// Make the most profit using multiple transactions
+    /// Constraints: You can only hold one stock at a time
+    /// Possible solution: Use a Vec instead of an i32 to track the transactions
+    pub fn max_profits_mult_transactions(prices: Vec<i32>) -> i32 {
+        let mut i = prices[0];
+        let profits = prices.into_iter().fold(Vec::new(), |mut profits, j| {
+            if j > i {
+                profits.push(j - i);
+                i = j;
+            } else {
+                i = j;
+            };
+            profits
+        });
+        profits.iter().sum()
+    }
 }
 
 #[cfg(test)]
@@ -87,5 +104,23 @@ mod tests {
         let input = vec![7, 1, 5, 3, 6, 4];
         let res = Solution::max_profit_faster(input);
         assert_eq!(5, res);
+    }
+    #[test]
+    fn max_profits_mult_transactions_succeeds1() {
+        let input = vec![7, 1, 5, 3, 6, 4];
+        let res = Solution::max_profits_mult_transactions(input);
+        assert_eq!(7, res);
+    }
+    #[test]
+    fn max_profits_mult_transactions_succeeds2() {
+        let input = vec![1, 2, 3, 4, 5];
+        let res = Solution::max_profits_mult_transactions(input);
+        assert_eq!(4, res);
+    }
+    #[test]
+    fn max_profits_mult_transactions_succeeds3() {
+        let input = vec![7, 6, 4, 3, 1];
+        let res = Solution::max_profits_mult_transactions(input);
+        assert_eq!(0, res);
     }
 }
